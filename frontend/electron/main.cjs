@@ -42,6 +42,7 @@ function startApi() {
     console.log('Starting API from:', apiPath);
 
     apiProcess = spawn(apiPath, [], {
+        cwd: path.dirname(apiPath),
         windowsHide: true,
         env: { ...process.env, ASPNETCORE_URLS: 'http://localhost:5000' }
     });
