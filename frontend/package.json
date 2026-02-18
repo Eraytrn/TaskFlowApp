@@ -34,8 +34,11 @@
     ],
     "extraResources": [
       {
-        "from": "../backend/TaskFlow.API/bin/Release/net8.0/win-x64/publish/TaskFlow.API.exe",
-        "to": "backend/TaskFlow.API.exe"
+        "from": "../backend/TaskFlow.API/bin/Release/net8.0/win-x64/publish/",
+        "to": "backend/",
+        "filter": [
+          "**/*"
+        ]
       },
       {
         "from": "../backend/TaskFlow.API/appsettings.json",
