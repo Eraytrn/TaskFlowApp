@@ -1,7 +1,13 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "TaskFlow Desktop Application",
+  "author": "Eraytrn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eraytrn/TaskFlowApp.git"
+  },
   "type": "module",
   "main": "electron/main.js",
   "scripts": {
