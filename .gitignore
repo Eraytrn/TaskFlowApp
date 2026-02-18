@@ -16,9 +16,17 @@ yarn-error.log*
 # Electron Build
 frontend/electron/dist/
 frontend/dist_electron/
+frontend/dist/
 *.exe
 *.dmg
 *.zip
+*.dll
+*.pak
+*.dat
+*.bin
+locales/
+resources/
+vk_swiftshader_icd.json
 *.AppImage
 
 # Environment & Editor
