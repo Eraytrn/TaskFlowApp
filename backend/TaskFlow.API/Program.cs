@@ -104,4 +104,20 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+// Otomatik Veritabanı Oluşturma / Güncelleme
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<TaskFlowDbContext>();
+        context.Database.Migrate(); // Veritabanı yoksa oluşturur, varsa günceller
+    }
+    catch (Exception ex)
+    {
+        // Hata olursa logla ama uygulamayı durdurma (veya durdurabilirsin)
+        Console.WriteLine("Database Migration Error: " + ex.Message);
+    }
+}
+
 app.Run();
