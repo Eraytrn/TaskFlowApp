@@ -43,7 +43,7 @@ function startApi() {
 
     apiProcess = spawn(apiPath, [], {
         windowsHide: true,
-        // stdio: 'inherit' // Uncomment for debugging
+        env: { ...process.env, ASPNETCORE_URLS: 'http://localhost:5000' }
     });
 
     apiProcess.on('error', (err) => {

@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance } from 'axios'
 
-const API_URL = 'http://localhost:5033/api'
+const API_URL = import.meta.env.PROD ? 'http://localhost:5000/api' : 'http://localhost:5033/api'
 
 class ApiClient {
   private client: AxiosInstance
