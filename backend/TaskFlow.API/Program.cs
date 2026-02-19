@@ -4,6 +4,7 @@ using System.Text;
 using TaskFlow.Application;
 using TaskFlow.Infrastructure;
 using TaskFlow.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

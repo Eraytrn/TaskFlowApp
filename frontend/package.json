@@ -28,6 +28,7 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
+    "publish": ["github"],
     "files": [
       "dist/**/*",
       "electron/**/*"
