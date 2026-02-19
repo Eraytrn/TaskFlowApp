@@ -39,7 +39,7 @@ router.beforeEach((to, _from, next) => {
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
-  } else if ((to.path === '/login' || to.path === '/register') && authStore.isAuthenticated) {
+  } else if (to.path === '/login' && authStore.isAuthenticated) {
     next('/boards')
   } else {
     next()

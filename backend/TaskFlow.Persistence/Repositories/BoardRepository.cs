@@ -34,6 +34,8 @@ namespace TaskFlow.Persistence.Repositories
                 .Include(b => b.Owner)
                 .Include(b => b.Tasks)
                     .ThenInclude(t => t.Labels)
+                .Include(b => b.Tasks)
+                    .ThenInclude(t => t.AssignedUser)
                 .Include(b => b.Labels)
                 .Include(b => b.Members) // For access control
                 .FirstOrDefaultAsync(b => b.Id == boardId, cancellationToken);
