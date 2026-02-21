@@ -243,6 +243,29 @@
       </div>
     </Transition>
 
+    <!-- Delete Confirm Modal -->
+    <Transition name="modal">
+      <div v-if="taskToDelete !== null" class="modal-overlay" @click.self="taskToDelete = null">
+        <div class="modal-card">
+          <div class="modal-header">
+            <h3>Görevi Sil</h3>
+            <button @click="taskToDelete = null" class="modal-close">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 1rem 0; color: #cbd5e1;">
+            <p>Bu görevi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
+          </div>
+          <div class="modal-actions" style="margin-top: 1rem;">
+            <button type="button" @click="taskToDelete = null" class="btn-cancel">İptal</button>
+            <button type="button" @click="confirmDeleteTask" class="btn-submit" style="background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">Sil</button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
     <!-- Task Detail / Comments Modal -->
     <Transition name="modal">
       <div v-if="showDetailModal && selectedTask" class="modal-overlay" @click.self="closeTaskDetail">
@@ -1699,6 +1722,8 @@ const newTask = reactive({
   assignedUserId: undefined as number | undefined
 })
 
+const taskToDelete = ref<number | null>(null)
+
 // Task Detail & Comments state
 const showDetailModal = ref(false)
 const selectedTask = ref<TaskItem | null>(null)
@@ -1810,12 +1835,18 @@ async function moveTask(taskId: number, newStatus: number) {
   }
 }
 
-async function deleteTask(taskId: number) {
-  if (confirm('Bu görevi silmek istediğinize emin misiniz?')) {
+function deleteTask(taskId: number) {
+  taskToDelete.value = taskId
+}
+
+async function confirmDeleteTask() {
+  if (taskToDelete.value !== null) {
     try {
-      await taskStore.deleteTask(taskId)
+      await taskStore.deleteTask(taskToDelete.value)
     } catch (err) {
       console.error('Failed to delete task:', err)
+    } finally {
+      taskToDelete.value = null
     }
   }
 }
